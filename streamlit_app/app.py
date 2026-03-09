@@ -1,6 +1,8 @@
 import streamlit as st
 import requests
 import base64
+import os
+
 
 st.set_page_config(page_title="Finance Briefing Assistant", layout="centered")
 
@@ -8,8 +10,7 @@ st.title(" Multi-Agent Finance Assistant")
 
 option = st.radio("Choose input method:", ("Text Query", "Voice Upload"))
 
-# ORCHESTRATOR_URL = "http://localhost:8000"
-ORCHESTRATOR_URL = "http://orchestrator:8000"
+ORCHESTRATOR_URL = os.getenv("ORCHESTRATOR_URL", "http://localhost:8000")
 
 
 if option == "Text Query":

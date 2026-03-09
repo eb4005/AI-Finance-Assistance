@@ -1,0 +1,53 @@
+Traceback (most recent call last):
+  File "C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\transformers\utils\import_utils.py", line 1967, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\transformers\pipelines\__init__.py", line 26, in <module>
+    from ..image_processing_utils import BaseImageProcessor
+  File "C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\transformers\image_processing_utils.py", line 22, in <module>
+    from .image_transforms import center_crop, normalize, rescale
+  File "C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\transformers\image_transforms.py", line 47, in <module>
+    import tensorflow as tf
+  File "C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\tensorflow\__init__.py", line 49, in <module>
+    from tensorflow._api.v2 import __internal__
+  File "C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\tensorflow\_api\v2\__internal__\__init__.py", line 8, in <module>
+    from tensorflow._api.v2.__internal__ import autograph
+  File "C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\tensorflow\_api\v2\__internal__\autograph\__init__.py", line 8, in <module>
+    from tensorflow.python.autograph.core.ag_ctx import control_status_ctx # line: 34
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\tensorflow\python\autograph\core\ag_ctx.py", line 21, in <module>
+    from tensorflow.python.autograph.utils import ag_logging
+  File "C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\tensorflow\python\autograph\utils\__init__.py", line 17, in <module>
+    from tensorflow.python.autograph.utils.context_managers import control_dependency_on_returns
+  File "C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\tensorflow\python\autograph\utils\context_managers.py", line 19, in <module>
+    from tensorflow.python.framework import ops
+  File "C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\tensorflow\python\framework\ops.py", line 33, in <module>
+    from tensorflow.core.framework import attr_value_pb2
+  File "C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\tensorflow\core\framework\attr_value_pb2.py", line 9, in <module>
+    from google.protobuf import runtime_version as _runtime_version
+ImportError: cannot import name 'runtime_version' from 'google.protobuf' (C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\google\protobuf\__init__.py)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\edwar\Desktop\GitHub Repos\AI-Finance-Assistance\test_import.py", line 3, in <module>
+    import agents.voice_agent.voice_agent
+  File "C:\Users\edwar\Desktop\GitHub Repos\AI-Finance-Assistance\agents\voice_agent\voice_agent.py", line 2, in <module>
+    from transformers import pipeline
+  File "<frozen importlib._bootstrap>", line 1412, in _handle_fromlist
+  File "C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\transformers\utils\import_utils.py", line 1955, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\transformers\utils\import_utils.py", line 1969, in _get_module
+    raise RuntimeError(
+RuntimeError: Failed to import transformers.pipelines because of the following error (look up to see its traceback):
+cannot import name 'runtime_version' from 'google.protobuf' (C:\Users\edwar\AppData\Local\Programs\Python\Python312\Lib\site-packages\google\protobuf\__init__.py)

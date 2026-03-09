@@ -23,9 +23,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose port
-EXPOSE 8000
+EXPOSE 8005
 
 # Start FastAPI with Uvicorn
-CMD ["uvicorn", "voice_agent:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "voice_agent:app", "--host", "0.0.0.0", "--port", "8005"]
 
 

@@ -34,8 +34,8 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 COPY . .
 
 # Expose port
-EXPOSE 8400
+EXPOSE 8004
 
 # Run the application
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8400"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8004"]
 

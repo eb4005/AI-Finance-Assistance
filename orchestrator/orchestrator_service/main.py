@@ -14,6 +14,7 @@ import logging
 import re
 import aiohttp
 import base64
+import os
 
 app = FastAPI()
 logging.basicConfig(level=logging.INFO)
@@ -21,6 +22,7 @@ logger = logging.getLogger("orchestrator")
 
 SERVICE_CONFIG = {
     "api": {
+        "host": os.getenv("API_HOST", "localhost"),
         "port": 8001,
         "timeout": 5,
         "endpoints": {
@@ -29,6 +31,7 @@ SERVICE_CONFIG = {
         }
     },
     "scraper": {
+        "host": os.getenv("SCRAPER_HOST", "localhost"),
         "port": 8003,
         "timeout": 10,
         "endpoints": {
@@ -36,6 +39,7 @@ SERVICE_CONFIG = {
         }
     },
     "retriever": {
+        "host": os.getenv("RETRIEVER_HOST", "localhost"),
         "port": 8002,
         "timeout": 5,
         "endpoints": {
@@ -43,13 +47,15 @@ SERVICE_CONFIG = {
         }
     },
     "llm": {
-        "port": 8400,
+        "host": os.getenv("LLM_HOST", "localhost"),
+        "port": 8004,
         "timeout": 30,
         "endpoints": {
             "brief": "/generate-brief"
         }
     },
     "voice": {
+        "host": os.getenv("VOICE_HOST", "localhost"),
         "port": 8005,
         "timeout": 15,
         "endpoints": {
@@ -58,10 +64,6 @@ SERVICE_CONFIG = {
         }
     }
 }
-
-def service_url(service: str, endpoint: str) -> str:
-    return f"http://localhost:{SERVICE_CONFIG[service]['port']}{SERVICE_CONFIG[service]['endpoints'][endpoint]}"
-
 
 def service_url(service: str, endpoint: str) -> str:
     cfg = SERVICE_CONFIG[service]

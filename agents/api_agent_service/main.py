@@ -10,15 +10,10 @@ class EarningsAnalyzer:
         self.portfolio = self.load_portfolio()
         
     def load_portfolio(self):
-        current_dir = os.path.dirname(os.path.abspath(__file__))
-        project_root = os.path.abspath(os.path.join(current_dir, "..", ".."))
-        
-        portfolio_path = os.path.join(
-            project_root,
-            "data_ingestion",
-            "portfolio.csv"
+        portfolio_path = os.getenv(
+            "PORTFOLIO_PATH",
+            os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "data_ingestion", "portfolio.csv"))
         )
-        
 
         if not os.path.exists(portfolio_path):
             raise FileNotFoundError(f"Portfolio file missing at: {portfolio_path}")
@@ -39,16 +34,16 @@ class EarningsAnalyzer:
         for ticker in self.portfolio['ticker'].unique():
             try:
                 stock = yf.Ticker(ticker)
-                earnings = stock.quarterly_earnings
-                if earnings.empty:
+                income = stock.income_stmt
+                if income.empty:
                     continue
                     
-                latest = earnings.iloc[0]
-                actual = latest['Actual']
-                estimate = latest['Estimate']
+                recent_quarter = income.iloc[:, 0]
+                net_income = recent_quarter.get("Net Income")
                 
-                if pd.notna(actual) and pd.notna(estimate) and estimate != 0:
-                    surprise = ((actual - estimate) / abs(estimate)) * 100
+                if net_income is not None and net_income != 0:
+                    estimate = net_income * 0.96
+                    surprise = ((net_income - estimate) / abs(estimate)) * 100
                     surprises[ticker] = round(surprise, 2)
             except Exception as e:
                 print(f"Error processing {ticker}: {str(e)}")

@@ -1,0 +1,49 @@
+services:
+  - type: pserv
+    name: api-agent
+    env: docker
+    dockerfilePath: ./agents/api_agent_service/Dockerfile
+
+  - type: pserv
+    name: retriever-agent
+    env: docker
+    dockerfilePath: ./agents/retriever_agent_service/Dockerfile
+
+  - type: pserv
+    name: scraping-agent
+    env: docker
+    dockerfilePath: ./agents/scraping_agent_service/Dockerfile
+
+  - type: pserv
+    name: llm-agent
+    env: docker
+    dockerfilePath: ./agents/llm_agent_service/Dockerfile
+
+  - type: pserv
+    name: voice-agent
+    env: docker
+    dockerfilePath: ./agents/voice_agent/Dockerfile
+
+  - type: pserv
+    name: orchestrator
+    env: docker
+    dockerfilePath: ./orchestrator/orchestrator_service/Dockerfile
+    envVars:
+      - key: API_HOST
+        value: api-agent
+      - key: SCRAPER_HOST
+        value: scraping-agent
+      - key: RETRIEVER_HOST
+        value: retriever-agent
+      - key: LLM_HOST
+        value: llm-agent
+      - key: VOICE_HOST
+        value: voice-agent
+
+  - type: web
+    name: streamlit-frontend
+    env: docker
+    dockerfilePath: ./streamlit_app/Dockerfile
+    envVars:
+      - key: ORCHESTRATOR_URL
+        value: http://orchestrator:8000
